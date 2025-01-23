@@ -26,13 +26,27 @@ Web Add Adress list Mikrotik
     git clone https://github.com/FoxGD3D/web-addlist-mikrotik.git
     cd web-addlist-mikrotik/backend
     ```
+    1.1 Добавте свои значения:
+   ```bash
+    nano app.py
+    ```
+   ```bash
+   Замените на свои значения
+       MIKROTIK_HOST = "Enter-Mikrotik-IP"
+       MIKROTIK_USER = Enter-Mikrotik-USER"
+       MIKROTIK_PASSWORD = "Enter-Mikrotik-PASS"
+    ```
+   Так же введите имя списка:
+    ```bash
+   <LIST-NAME>
+    ```
 
-2. Соберите Docker-образ:
+3. Соберите Docker-образ:
     ```bash
     docker build -t flask-backend .
     ```
 
-3. Запустите контейнер:
+4. Запустите контейнер:
     ```bash
     docker run -d -p 5001:5001 flask-backend
     ```
