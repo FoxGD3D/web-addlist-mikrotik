@@ -79,11 +79,12 @@ Web Add Adress list Mikrotik
 
 ```
 .
-├── app.py                # Код бэкенда на Flask
-├── Dockerfile            # Docker-конфигурация
-├── requirements.txt      # Зависимости Python
-├── index.html            # Код фронтенда
-└── README.md             # Документация
+├── backend              # Бэкенд
+│   ├── app.py           # Код бэкенда на Flask
+│   ├── requirements.txt # Зависимости Python
+├── frontend             # Фронтенд
+│   ├── index.html       # Код фронтенда
+├── README.md            # Документация
 ```
 
 ## API
