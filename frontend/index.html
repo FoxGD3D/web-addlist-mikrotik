@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web AddList Mikrotik</title>
+</head>
+<body>
+    <h1>Добавить домен</h1>
+    
+    <form id="unlockForm">
+        <label for="domain">Введите домен:</label>
+        <input type="text" id="domain" name="domain" required>
+        <button type="submit">Добавить</button>
+    </form>
+
+    <div id="message"></div>
+
+    <script>
+        // Обработчик формы
+        document.getElementById('unlockForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Предотвратить отправку формы
+
+            const domain = document.getElementById('domain').value;
+            const messageDiv = document.getElementById('message');
+
+            // Отправляем POST-запрос на бэкенд
+            fetch('http://IP-ADRESS:PORT/api/unlock', { //Пример http://192.168.1.1:5001/api/unlock
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ domain }) // Передаем домен
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.message) {
+                    messageDiv.textContent = data.message;
+                    messageDiv.style.color = 'green';
+                } else if (data.error) {
+                    messageDiv.textContent = `Ошибка: ${data.error}`;
+                    messageDiv.style.color = 'red';
+                }
+            })
+            .catch(error => {
+                messageDiv.textContent = `Ошибка при подключении: ${error}`;
+                messageDiv.style.color = 'red';
+            });
+        });
+    </script>
+</body>
+</html>
