@@ -26,7 +26,7 @@ def unlock_domain():
         ssh.connect(MIKROTIK_HOST, port=MIKROTIK_PORT, username=MIKROTIK_USER, password=MIKROTIK_PASSWORD)
 
         # Выполнение команды добавления в список
-        command = f"/ip firewall address-list add list=rkn_wg address={domain} comment=AddFromApi"
+        command = f"/ip firewall address-list add list=<LIST-NAME> address={domain} comment=AddFromWALM" # вместо <LIST-NAME> вписать имя списка
         stdin, stdout, stderr = ssh.exec_command(command)
 
         # Проверка результата
@@ -35,7 +35,7 @@ def unlock_domain():
             return jsonify({"error": f"Ошибка выполнения команды: {error}"}), 500
 
         ssh.close()
-        return jsonify({"message": f"Домен {domain} успешно добавлен в rkn_wg"})
+        return jsonify({"message": f"Домен {domain} успешно добавлен в список"}) 
 
     except Exception as e:
         return jsonify({"error": f"Ошибка при подключении: {str(e)}"}), 500
